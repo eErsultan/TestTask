@@ -17,7 +17,8 @@ namespace Infrastructure.MongoDB.Repositories.Base
 
         public MongoRepository(MongoDBSettings settings)
         {
-            var database = new MongoClient(settings.ConnectionURI).GetDatabase(settings.DatabaseName);
+            var client = new MongoClient(settings.ConnectionURI);
+            var database = client.GetDatabase(settings.DatabaseName);
             _collection = database.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
         }
 

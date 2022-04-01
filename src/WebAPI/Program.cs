@@ -5,7 +5,6 @@ using Serilog;
 using Serilog.Events;
 using System;
 using System.Reflection;
-using WebAPI.Extensions;
 
 namespace WebAPI
 {

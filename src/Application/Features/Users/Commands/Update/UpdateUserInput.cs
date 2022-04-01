@@ -1,11 +1,8 @@
-﻿using Domain.Attributes;
-using Domain.Common;
-
-namespace Domain.Documents
+﻿namespace Application.Features.Users.Commands.Update
 {
-    [BsonCollection("users")]
-    public class User : Document
+    public class UpdateUserInput
     {
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Patronymic { get; set; }

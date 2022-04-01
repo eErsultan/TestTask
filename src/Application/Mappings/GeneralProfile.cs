@@ -1,8 +1,4 @@
-﻿using Application.DTOs.Article;
-using Application.Features.Articles.Commands.Create;
-using Application.Features.Articles.Commands.Update;
-using AutoMapper;
-using Domain.Entities;
+﻿using AutoMapper;
 
 namespace Application.Mappings
 {
@@ -10,9 +6,6 @@ namespace Application.Mappings
     {
         public GeneralProfile()
         {
-            CreateMap<Article, ArticleDto>();
-            CreateMap<CreateArticleCommand, Article>();
-            CreateMap<UpdateArticleCommand, Article>();
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using Domain.Attributes;
-using Domain.Common;
-
-namespace Domain.Documents
+﻿namespace Application.Features.Users.Commands.Create
 {
-    [BsonCollection("users")]
-    public class User : Document
+    public class CreateUserInput
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

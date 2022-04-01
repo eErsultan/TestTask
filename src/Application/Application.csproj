@@ -16,13 +16,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Features\Users\Commands\Create\" />
-	  <Folder Include="Features\Users\Commands\Update\" />
-	  <Folder Include="Features\Users\Commands\Delete\" />
-	  <Folder Include="Features\Users\Queries\GetAll\" />
-	  <Folder Include="Features\Users\Queries\GetById\" />
-	</ItemGroup>
 	
 </Project>

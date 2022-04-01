@@ -1,13 +1,13 @@
 using Application;
 using Application.Interfaces;
-using WebAPI.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Infrastructure.Persistence;
 using WebAPI.GraphQL;
+using Application.Interfaces.Repositories;
+using Infrastructure.MongoDB;
 
 namespace WebAPI
 {
@@ -22,11 +22,12 @@ namespace WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplicationLayer(Configuration);
-            services.AddPersistenceInfrastructure(Configuration);
-           
-            services.AddGraphQLServer()
-                    .AddQueryType<Query>();
+            services
+                .AddMongoDBInfrastructure(Configuration)
+                .AddGraphQLServer()
+                .ModifyRequestOptions(o => o.IncludeExceptionDetails = true)
+                .AddQueryType<Query>()
+                .AddMutationType<Mutation>();
         }
 
         public void Configure(

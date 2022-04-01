@@ -10,12 +10,14 @@ namespace Infrastructure.MongoDB
 {
     public static class DependencyInjection
     {
-        public static void AddMongoDBInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddMongoDBInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<MongoDBSettings>(configuration.GetSection("MongoDBSettings"));
 
             services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+
+            return services;
         }
     }
 }
