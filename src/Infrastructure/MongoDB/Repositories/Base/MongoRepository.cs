@@ -15,9 +15,8 @@ namespace Infrastructure.MongoDB.Repositories.Base
     {
         protected readonly IMongoCollection<TDocument> _collection;
 
-        public MongoRepository(MongoDBSettings settings)
+        public MongoRepository(IMongoClient client, MongoDBSettings settings)
         {
-            var client = new MongoClient(settings.ConnectionURI);
             var database = client.GetDatabase(settings.DatabaseName);
             _collection = database.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
         }
@@ -30,12 +29,10 @@ namespace Infrastructure.MongoDB.Repositories.Base
                 .FirstOrDefault())?.CollectionName;
         }
 
-        public async Task<ICollection<TDocument>> GetPagedResponseAsync(int pageNumber, int pageSize)
+        public async Task<ICollection<TDocument>> GetAllAsync()
         {
             return await _collection
                 .Find(x => true)
-                .Skip((pageNumber - 1) * pageSize)
-                .Limit(pageSize)
                 .ToListAsync();
         }
 

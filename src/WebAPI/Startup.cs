@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 using WebAPI.GraphQL;
 using Application.Interfaces.Repositories;
 using Infrastructure.MongoDB;
+using WebAPI.GraphQL.Queries;
+using WebAPI.GraphQL.Mutations;
+using Application.Constants;
 
 namespace WebAPI
 {
@@ -22,12 +25,17 @@ namespace WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddMongoDBInfrastructure(Configuration)
-                .AddGraphQLServer()
-                .ModifyRequestOptions(o => o.IncludeExceptionDetails = true)
-                .AddQueryType<Query>()
-                .AddMutationType<Mutation>();
+            services.AddApplicationLayer(Configuration);
+            services.AddMongoDBInfrastructure(Configuration);
+            services.AddGraphQLServer()
+                    .AddFiltering()
+                    .ModifyRequestOptions(o => o.IncludeExceptionDetails = true)
+                    .AddQueryType(q => q.Name(GraphQLRequestType.QUERY))
+                        .AddType<UserQuery>()
+                        .AddType<TodoListQuery>()
+                    .AddMutationType(m => m.Name(GraphQLRequestType.MUTATION))
+                        .AddType<UserMutation>()
+                        .AddType<TodoListMutation>();
         }
 
         public void Configure(

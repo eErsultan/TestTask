@@ -7,9 +7,9 @@ using MongoDB.Driver;
 
 namespace Infrastructure.MongoDB.Repositories
 {
-    public class UserRepository : MongoRepository<User>, IUserRepository
+    public class TodoListRepository : MongoRepository<TodoList>, ITodoListRepository
     {
-        public UserRepository(IMongoClient client, IOptions<MongoDBSettings> settings) : base(client, settings.Value)
+        public TodoListRepository(IMongoClient client, IOptions<MongoDBSettings> settings) : base(client, settings.Value)
         { }
     }
 }
